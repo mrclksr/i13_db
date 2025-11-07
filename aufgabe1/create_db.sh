@@ -1,7 +1,7 @@
 #!/bin/sh
 
 CSV_SEPARATOR=';'
-ORDERED_TABLES="bestellung warenkorb produkt hersteller kunden"
+ORDERED_TABLES="bestellung warenkorb produkte hersteller kunden"
 
 init_import_params() {
 cat << END
