@@ -21,3 +21,6 @@ bash create_db.sh | C:\sqlite3\sqlite3.exe
 1. Install [DBeaver](https://dbeaver.io/)
 2. Connect the created `online_shop.db` in *DBeaver* via *Database* -> *new connection*
 3. Create the ERD from the database navigator
+
+
+![](shop_erd.png)
