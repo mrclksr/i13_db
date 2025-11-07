@@ -1,7 +1,7 @@
 #!/bin/sh
 
 DB_NAME="online_shop.db"
-CSV_PATH="../csv"
+CSV_PATH="../aufgabe1"
 CSV_SEPARATOR=';'
 ORDERED_TABLES="bestellung warenkorb produkte hersteller kunden"
 
