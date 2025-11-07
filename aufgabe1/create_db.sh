@@ -90,7 +90,7 @@ create_tables() {
 	done
 }
 
-init
+init_import_params
 drop_dbs
 create_tables
 save_db
