@@ -3,7 +3,7 @@
 DB_NAME="online_shop.db"
 CSV_PATH="../aufgabe1"
 CSV_SEPARATOR=';'
-ORDERED_TABLES="bestellung warenkorb produkte hersteller kunden"
+ORDERED_TABLES="kunden bestellung hersteller produkte warenkorb"
 
 init_import_params() {
 cat << END
@@ -54,6 +54,7 @@ produktnummer TEXT,
 menge INTEGER,
 preis REAL,
 PRIMARY KEY(bestellnummer, produktnummer),
+FOREIGN KEY (bestellnummer) REFERENCES bestellung(bestellnummer),
 FOREIGN KEY (produktnummer) REFERENCES produkte(produktnummer));
 .import ${CSV_PATH}/warenkorb.CSV warenkorb
 
@@ -66,7 +67,6 @@ CREATE TABLE bestellung (bestellnummer INTEGER PRIMARY KEY,
 datum TEXT, kundennummer TEXT,
 versandkosten REAL,
 gesamtkosten REAL,
-FOREIGN KEY (bestellnummer) REFERENCES warenkorb(bestellnummer),
 FOREIGN KEY (kundennummer) REFERENCES kunden(kundennummer));
 .import ${CSV_PATH}/bestellung.CSV bestellung
 
@@ -81,7 +81,7 @@ END
 }
 
 drop_dbs() {
-    for t in ${ORDERED_TABLES}; do
+    for t in $(echo ${ORDERED_TABLES} | tr ' ' '\n' | tac | tr '\n' ' ') ; do
         echo "DROP TABLE IF EXISTS $t;"
     done
 }
