@@ -22,3 +22,5 @@ bash create_mysql_db.sh | C:\xampp\mysql\bin\mysql.exe -u root -p online_shop
 ## 3. Open phpMyAdmin
 
 Go to http://localhost/phpmyadmin and download the diagramm from the Designer.
+
+![](diagramm.png)
