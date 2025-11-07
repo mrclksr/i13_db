@@ -1,5 +1,7 @@
 #!/bin/sh
 
+DB_NAME="online_shop.db"
+CSV_PATH="../csv"
 CSV_SEPARATOR=';'
 ORDERED_TABLES="bestellung warenkorb produkte hersteller kunden"
 
@@ -21,7 +23,7 @@ hausnummer TEXT,
 plz TEXT,
 stadt TEXT,
 land TEXT);
-.import kunden.CSV kunden
+.import ${CSV_PATH}/kunden.CSV kunden
 
 END
 }
@@ -29,7 +31,7 @@ END
 create_hersteller_db() {
 cat << END
 CREATE TABLE hersteller (name TEXT PRIMARY KEY, land TEXT);
-.import hersteller.CSV hersteller
+.import ${CSV_PATH}/hersteller.CSV hersteller
 
 END
 }
@@ -40,7 +42,7 @@ CREATE TABLE produkte (produktnummer TEXT PRIMARY KEY,
 bezeichnung TEXT,
 hersteller TEXT,
 FOREIGN KEY (hersteller) REFERENCES hersteller(name));
-.import produkte.CSV produkte
+.import ${CSV_PATH}/produkte.CSV produkte
 
 END
 }
@@ -53,7 +55,7 @@ menge INTEGER,
 preis REAL,
 PRIMARY KEY(bestellnummer, produktnummer),
 FOREIGN KEY (produktnummer) REFERENCES produkte(produktnummer));
-.import warenkorb.CSV warenkorb
+.import ${CSV_PATH}/warenkorb.CSV warenkorb
 
 END
 }
@@ -66,14 +68,14 @@ versandkosten REAL,
 gesamtkosten REAL,
 FOREIGN KEY (bestellnummer) REFERENCES warenkorb(bestellnummer),
 FOREIGN KEY (kundennummer) REFERENCES kunden(kundennummer));
-.import bestellung.CSV bestellung
+.import ${CSV_PATH}/bestellung.CSV bestellung
 
 END
 }
 
 save_db() {
 cat << END
-.save shop.db
+.save ${DB_NAME}
 
 END
 }
